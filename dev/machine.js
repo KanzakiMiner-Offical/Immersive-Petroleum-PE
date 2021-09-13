@@ -7,6 +7,7 @@ IMPORT("ChargeItem");
 IMPORT("MachineRender");
 IMPORT("TileRender");
 IMPORT("LiquidLib");
+IMPORT("StorageInterface");
 
 // file: API/machine.js
 // energy (Eu)
