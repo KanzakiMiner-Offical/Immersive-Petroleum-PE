@@ -59,7 +59,7 @@ MachineRegistry.registerElectricMachine(BlockID.pumpJack, {
 	},
 	
 	getGuiScreen: function(){
-       return guiLPU;
+       return uiPump;
     },
 	
 	init: function(){
