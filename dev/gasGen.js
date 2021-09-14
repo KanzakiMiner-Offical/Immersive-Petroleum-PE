@@ -22,16 +22,15 @@ var guiGasgen = new UI.StandartWindow({
   },
 
   drawing: [
-    { type: "bitmap", x: 702, y: 91, bitmap: "rf_scale", scale: 0.6 },
-    { type: "bitmap", x: 479, y: 160, bitmap: "gui_liquid_storage_overlay", scale: 4.3 }
+    { type: "bitmap", x: 702, y: 91, bitmap: "rf_scale", scale: 3.2 },
+    { type: "bitmap", x: 479, y: 160, bitmap: "gui_liquid_storage_overlay", scale: 3.2 }
 	],
 
   elements: {
     "energyScale": { type: "scale", x: 702 + 4 * GUI_SCALE, y: 91, direction: 0, value: 0.5, bitmap: "rf_scale_full", scale: 0.6 },
-    "liquidScale": { type: "scale", x: 482, y: 169, direction: 0, value: 0.5, bitmap: "liquid_gasoline", scale: 0.15 },
+    "liquidScale": { type: "scale", x: 482, y: 169, direction: 0, value: 0.5, bitmap: "gui_water_scale", scale: 3.2 },
     "slot1": { type: "slot", x: 408, y: 156 },
-    "slot2": { type: "slot", x: 408, y: 80, isValid: function() { return false; } },
-    "slotEnergy": { type: "slot", x: 725, y: 165, isValid: function(id) { return ChargeItemRegistry.isValidItem(id, "Rf", 1); } }
+    "slot2": { type: "slot", x: 408, y: 80, isValid: function() { return false; } }
   }
 });
 
@@ -84,9 +83,7 @@ MachineRegistry.registerGenerator(BlockID.gasGenerator, {
       this.stopPlaySound();
       this.deactivate();
     }
-
-    this.data.energy -= ChargeItemRegistry.addEnergyTo(this.container.getSlot("slotEnergy"), "Rf", this.data.energy, 1);
-
+    
     this.liquidStorage.updateUiScale("liquidScale", liquid);
     this.container.setScale("energyScale", this.data.energy / energyStorage);
   },

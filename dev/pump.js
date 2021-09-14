@@ -16,7 +16,7 @@ var uiPump = new UI.StandartWindow({
     inventory: { standart: true }
   },
   drawing: [
-    { type: "scale", x: 500, y: 120, direction: 0, bitmap: "rf_scale", scale: 3.2 },
+    { type: "bitmap", x: 702, y: 91, bitmap: "rf_scale", scale: 3.2 },
     { type: "scale", x: 450, y: 130, direction: 0, bitmap: "arrow_bar_scale", scale: 3.2 }
 ],
   elements: {
@@ -33,7 +33,7 @@ var uiPump = new UI.StandartWindow({
         return LiquidLib.getFullItem(id, data, "oil") ? true : false;
       }
     },
-    "scale_4": { type: "scale", x: 500, y: 90, direction: 0, bitmap: "oil_flow", scale: 3.2, value: 1 },
+    "scale_4": { type: "scale", x: 500, y: 90, direction: 0, bitmap: "gui_water_scale", scale: 3.2, value: 1 },
     "scale_5": { type: "scale", x: 450, y: 130, direction: 0, bitmap: "progress", scale: 3.2, value: 1 }
   }
 });
