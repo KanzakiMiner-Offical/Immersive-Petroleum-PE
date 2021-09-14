@@ -54,19 +54,14 @@ MachineRegistry.registerGenerator(BlockID.gasGenerator, {
 
   getLiquidFromItem: MachineRegistry.getLiquidFromItem,
 
-  click: function(id, count, data, coords) {
-    if (Entity.getSneaking(player)) {
-      var liquid = this.liquidStorage.getLiquidStored();
-      return this.getLiquidFromItem(liquid, { id: id, count: count, data: data }, null, true);
-    }
-  },
-
   tick: function() {
     StorageInterface.checkHoppers(this);
     var energyStorage = this.getEnergyStorage();
     var liquid = this.liquidStorage.getLiquidStored();
+    
     var slot1 = this.container.getSlot("slot1");
     var slot2 = this.container.getSlot("slot2");
+    
     this.getLiquidFromItem(liquid, slot1, slot2);
 
     if (this.data.fuel <= 0) {
@@ -109,3 +104,19 @@ MachineRegistry.registerGenerator(BlockID.gasGenerator, {
 });
 
 TileRenderer.setRotationPlaceFunction(BlockID.gasGenerator);
+
+StorageInterface.createInterface(BlockID.gasGenerator, {
+	slots: {
+		"slot1": {input: true},
+		"slot2": {output: true}
+	},
+	isValidInput: function(item){
+		var empty = LiquidLib.getEmptyItem(item.id, item.data);
+		if(!empty) return false;
+		return MachineRecipeRegistry.hasRecipeFor("gasGen", empty.liquid);
+	},
+	canReceiveLiquid: function(liquid, side){
+		return MachineRecipeRegistry.hasRecipeFor("gasGen", liquid)
+	},
+	canTransportLiquid: function(liquid, side){ return false; }
+});
